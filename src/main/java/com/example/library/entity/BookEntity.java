@@ -3,6 +3,8 @@ package com.example.library.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -19,5 +21,8 @@ public class BookEntity {
     private String name;
     private String genre;
     private String nameAuthor;
+
+    @OneToMany(mappedBy = "book")
+    private List<BookReaderEntity> readerEntityList;
 
 }
