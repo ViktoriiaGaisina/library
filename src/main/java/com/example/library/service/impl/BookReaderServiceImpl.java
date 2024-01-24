@@ -1,5 +1,6 @@
 package com.example.library.service.impl;
 
+import com.example.library.dto.ReaderBookDTO;
 import com.example.library.dto.bookreader.BookReaderDTO;
 import com.example.library.entity.BookReaderEntity;
 import com.example.library.repository.BookReaderRepository;
@@ -19,17 +20,34 @@ public class BookReaderServiceImpl implements BookReaderService {
 
     @Override
     public List<BookReaderDTO> getBookReaderEntities(String firstname, String surname) {
-       return bookReaderRepository.findBookReaderEntities(firstname, surname).stream()
-               .map(tmp->BookReaderDTO.builder()
-                       .firstname(tmp.getFirstname())
-                       .surname(tmp.getSurname())
-                       .build())
-               .collect(Collectors.toList());
+        return bookReaderRepository.findBookReaderEntities(firstname, surname).stream()
+                .map(tmp -> BookReaderDTO.builder()
+                        .firstname(tmp.getFirstname())
+                        .surname(tmp.getSurname())
+                        .build())
+                .collect(Collectors.toList());
 
     }
 
     @Override
-    public void registerBookTakenByReader(String firsname, String surname, LocalDate registrationDate, Long bookId) {
-        bookReaderRepository.registerBookTakenByReader(firsname, surname, registrationDate, bookId);
+    public void registerBookTakenByReader(ReaderBookDTO readerBookDTO) {
+        bookReaderRepository.registerBookTakenByReader(
+                readerBookDTO.getFirstname(),
+                readerBookDTO.getSurname(),
+                readerBookDTO.getDate(),
+                readerBookDTO.getBookId()
+        );
     }
+
+    @Override
+    public List<BookReaderDTO> findBookReaderEntitiesByBook_Id(Long id) {
+        return bookReaderRepository.findBookReaderEntitiesByBook_Id(id).stream()
+        .map(tmp ->BookReaderDTO.builder()
+                .firstname(tmp.getFirstname())
+                .surname(tmp.getSurname())
+                .build())
+                .collect(Collectors.toList());
+    }
+
+
 }

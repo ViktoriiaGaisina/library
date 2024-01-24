@@ -1,13 +1,11 @@
 package com.example.library.controller;
 
 import com.example.library.dto.book.BookDTO;
-import com.example.library.dto.bookreader.BookReaderDTO;
-import com.example.library.entity.BookReaderEntity;
+import com.example.library.dto.bookreader.BookReaderupdateDTO;
 import com.example.library.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -29,9 +27,20 @@ public class BookController {
     public List<BookDTO> getBookEntityIsRead() {
         return bookService.getBookEntityIsRead();
     }
-    @GetMapping("/{bookId}/readers")
-    public List<BookReaderDTO> getBookReadersBookbyId(@PathVariable Long bookId) {
-        return bookService.getReadersBookById(bookId);
 
+    @GetMapping("/{bookId}/delete")
+    public void deleteBook(@PathVariable Long id) {
+        bookService.deleteBook(id);
+    }
+
+    @PutMapping("/update")
+    public void updateBook(@RequestBody BookReaderupdateDTO bookReaderupdateDTO) {
+        bookService.updateBook(bookReaderupdateDTO);
+    }
+
+    @PostMapping("/save")
+    public void addBook(@RequestBody BookDTO bookDTO) {
+        bookService.addBook(bookDTO);
     }
 }
+

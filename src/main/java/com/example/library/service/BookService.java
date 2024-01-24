@@ -2,6 +2,7 @@ package com.example.library.service;
 
 import com.example.library.dto.book.BookDTO;
 import com.example.library.dto.bookreader.BookReaderDTO;
+import com.example.library.dto.bookreader.BookReaderupdateDTO;
 import com.example.library.entity.BookEntity;
 import com.example.library.entity.BookReaderEntity;
 import org.springframework.data.repository.query.Param;
@@ -13,5 +14,10 @@ public interface BookService {
     List<BookDTO> getBookEntities(String name, String nameAuthor, String genre);
 
     List<BookDTO> getBookEntityIsRead();
-    List<BookReaderDTO> getReadersBookById(Long bookId);
+
+    public void addBook(BookDTO bookDTO);
+
+    public void updateBook(BookReaderupdateDTO readerupdateDTO);
+
+    public void deleteBook(Long id);
 }

@@ -1,6 +1,8 @@
 package com.example.library.controller;
 
+import com.example.library.dto.ReaderBookDTO;
 import com.example.library.dto.bookreader.BookReaderDTO;
+import com.example.library.entity.BookReaderEntity;
 import com.example.library.service.BookReaderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -21,15 +23,15 @@ public class BookReaderController {
     ) {
         return bookReaderService.getBookReaderEntities(firstname, surname);
     }
+    @GetMapping("{id}/all")
+    public List<BookReaderDTO> findBookReaderEntitiesByBook_Id(
+            @PathVariable(name = "id") Long id) {
+                return bookReaderService.findBookReaderEntitiesByBook_Id(id);
+    }
 
     @PostMapping("/save")
-    public void registerBookTakenByReader(
-            @RequestParam(name = "firstname") String firsname,
-            @RequestParam(name = "surname") String surname,
-            @RequestParam(name = "registrationDate") LocalDate registrationDate,
-            @PathVariable(name = "bookId") Long bookId
-    ) {
-        bookReaderService.registerBookTakenByReader(firsname, surname, registrationDate, bookId);
+    public void registerBookTakenByReader(@RequestBody ReaderBookDTO readerBookDTO) {
+        bookReaderService.registerBookTakenByReader(readerBookDTO);
     }
 
 }

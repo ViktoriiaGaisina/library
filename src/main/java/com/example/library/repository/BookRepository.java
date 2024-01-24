@@ -22,6 +22,14 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
             nativeQuery = true)
     List<BookEntity> findBookEntityIsRead();
 
-    @Query(value = "SELECT BookEntity.readerEntityList FROM BookEntity WHERE BookEntity.id = : bookId")
-    List<BookReaderEntity> findReadersBookById(@Param("bookId") Long bookId);
+    @Query(value = "UPDATE book SET name = :name, genre = :genre, name_author = :nameAuthor WHERE book_id_pk = :id",
+            nativeQuery = true)
+    void updateBook(
+            @Param("id") Long id,
+            @Param("name") String name,
+            @Param("genre") String genre,
+            @Param("nameAuthor") String nameAuthor
+    );
+
 }
+

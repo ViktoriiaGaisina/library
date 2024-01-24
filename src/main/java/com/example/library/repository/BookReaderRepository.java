@@ -20,11 +20,13 @@ public interface BookReaderRepository extends JpaRepository<BookReaderEntity, Lo
     );
 
     @Query(value = "INSERT INTO book_reader (firstname, surname, registration_date, book_id_fk) VALUES (:firstname, :surname, :registrationDate, :bookId)", nativeQuery = true)
-    BookReaderDTO registerBookTakenByReader(
+    BookReaderEntity registerBookTakenByReader(
             @Param("firstname") String firstname,
             @Param("surname") String surname,
             @Param("registrationDate") LocalDate registrationDate,
             @Param("bookId") Long bookId
     );
+    List<BookReaderEntity> findBookReaderEntitiesByBook_Id(Long id);
+
 
 }

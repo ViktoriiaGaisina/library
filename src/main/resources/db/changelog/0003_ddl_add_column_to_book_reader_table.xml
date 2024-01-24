@@ -1,11 +1,7 @@
 <databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
     <changeSet id="0003_ddl_add_column_to_book_reader" author="Vika">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists  tableName="book_reader"/>
-            </not>
-        </preConditions>
+
         <sqlFile dbms="postgresql"
                  path="db/changelog/sql/0003_ddl_add_column_to_book_reader_table.sql"/>
     </changeSet>
