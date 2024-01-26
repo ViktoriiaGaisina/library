@@ -22,6 +22,12 @@ public class BookReaderEntity {
     @Column(name = "registration_date")
     private LocalDate date;
 
+    @Column (name = "start_reed_date")
+    private LocalDate startReed;
+
+    @Column (name = "end_reed_date")
+    private LocalDate endReed;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="book_id_fk")
     private BookEntity book;

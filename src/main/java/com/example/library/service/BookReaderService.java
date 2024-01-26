@@ -10,8 +10,15 @@ import java.util.List;
 
 public interface BookReaderService {
     List<BookReaderDTO> getBookReaderEntities(String firstname, String surname);
+    /*Поиск читателей: Пользователи должны иметь возможность искать читателей по имени и фамилии
+    eсли нужный читатель не нашелся то нужно выдавать с похожим названием читателя/читателей*/
 
-    void registerBookTakenByReader(ReaderBookDTO readerBookDTO);
+    public void saveReader(ReaderBookDTO readerBookDTO);
+    /*Поиск книг которые в данный момент читают
+     (выдавать список в порядке даты - то есть первым из списка выдается та книга которую только начали читать и тд ) и еще небольшое условие
+      когда читатель взял книгу читать то присваивается читателю дата когда он взял эту книгу
+      дата присваивается автоматически*/
     List<BookReaderDTO> findBookReaderEntitiesByBook_Id(Long id);
+    /*Пользователи должны иметь возможность выдавать книги читателям, отслеживать, какие книги в данный момент выданы*/
 }
 

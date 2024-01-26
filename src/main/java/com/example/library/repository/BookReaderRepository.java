@@ -16,17 +16,8 @@ public interface BookReaderRepository extends JpaRepository<BookReaderEntity, Lo
             nativeQuery = true)
     List<BookReaderEntity> findBookReaderEntities(
             @Param("firstname") String firstname,
-            @Param("surname") String surname
-    );
-
-    @Query(value = "INSERT INTO book_reader (firstname, surname, registration_date, book_id_fk) VALUES (:firstname, :surname, :registrationDate, :bookId)", nativeQuery = true)
-    BookReaderEntity registerBookTakenByReader(
-            @Param("firstname") String firstname,
-            @Param("surname") String surname,
-            @Param("registrationDate") LocalDate registrationDate,
-            @Param("bookId") Long bookId
+            @Param("surname") String surname/*Поиск читателей: Пользователи должны иметь возможность искать читателей по имени и фамилии
+если нужный читатель не нашелся то нужно выдавать с похожим названием читателя/читателей*/
     );
     List<BookReaderEntity> findBookReaderEntitiesByBook_Id(Long id);
-
-
 }

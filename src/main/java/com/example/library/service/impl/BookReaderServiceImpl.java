@@ -1,15 +1,13 @@
 package com.example.library.service.impl;
 
+import com.example.library.dao.BookReaderDao;
 import com.example.library.dto.ReaderBookDTO;
 import com.example.library.dto.bookreader.BookReaderDTO;
-import com.example.library.entity.BookReaderEntity;
 import com.example.library.repository.BookReaderRepository;
 import com.example.library.service.BookReaderService;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +15,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BookReaderServiceImpl implements BookReaderService {
     private final BookReaderRepository bookReaderRepository;
+    private final BookReaderDao readerDao;
 
     @Override
     public List<BookReaderDTO> getBookReaderEntities(String firstname, String surname) {
@@ -26,28 +25,28 @@ public class BookReaderServiceImpl implements BookReaderService {
                         .surname(tmp.getSurname())
                         .build())
                 .collect(Collectors.toList());
-
     }
 
     @Override
-    public void registerBookTakenByReader(ReaderBookDTO readerBookDTO) {
-        bookReaderRepository.registerBookTakenByReader(
+    public void saveReader(ReaderBookDTO readerBookDTO) {
+        if(readerBookDTO.getFirstname().isEmpty()) {
+            throw new IllegalArgumentException("Фамилия обязательна к заполнению");
+        }
+        readerDao.saveReader(
                 readerBookDTO.getFirstname(),
                 readerBookDTO.getSurname(),
-                readerBookDTO.getDate(),
-                readerBookDTO.getBookId()
-        );
+                readerBookDTO.getStartReed(),
+                readerBookDTO.getBookId());
     }
+
 
     @Override
     public List<BookReaderDTO> findBookReaderEntitiesByBook_Id(Long id) {
         return bookReaderRepository.findBookReaderEntitiesByBook_Id(id).stream()
-        .map(tmp ->BookReaderDTO.builder()
-                .firstname(tmp.getFirstname())
-                .surname(tmp.getSurname())
-                .build())
+                .map(tmp -> BookReaderDTO.builder()
+                        .firstname(tmp.getFirstname())
+                        .surname(tmp.getSurname())
+                        .build())
                 .collect(Collectors.toList());
     }
-
-
 }

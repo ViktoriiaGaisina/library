@@ -58,8 +58,8 @@ public class BookServiceImpl implements BookService {
                 bookReaderupdateDTO.getId(),
                 bookReaderupdateDTO.getName(),
                 bookReaderupdateDTO.getGenre(),
-                bookReaderupdateDTO.getNameAuthor()
-        );
+                bookReaderupdateDTO.getNameAuthor());
+
     }
 
     @Override

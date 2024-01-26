@@ -5,3 +5,8 @@ databaseChangeLog:
       file: db/changelog/0002_ddl_create_book_reader.xml
   - include:
       file: db/changelog/0003_ddl_add_column_to_book_reader_table.xml
+  - include:
+      file: db/changelog/0004_ddl_add_column_to_book_reader_table.xml
+  - include:
+      file: db/changelog/0005_ddl_add_column_to_book_reader_table.xml
+

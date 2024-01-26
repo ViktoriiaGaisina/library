@@ -8,6 +8,7 @@ import java.time.LocalDate;
 public class ReaderBookDTO {
     private String firstname;
     private String surname;
-    private LocalDate date;
     private Long bookId;
+    private LocalDate startReed;
+    private LocalDate endReed;
 }

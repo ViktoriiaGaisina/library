@@ -30,8 +30,8 @@ public class BookReaderController {
     }
 
     @PostMapping("/save")
-    public void registerBookTakenByReader(@RequestBody ReaderBookDTO readerBookDTO) {
-        bookReaderService.registerBookTakenByReader(readerBookDTO);
+    public void saveReader(@RequestBody ReaderBookDTO readerBookDTO) {
+        bookReaderService.saveReader(readerBookDTO);
     }
 
 }
