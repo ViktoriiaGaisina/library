@@ -32,11 +32,7 @@ public class BookReaderServiceImpl implements BookReaderService {
         if(readerBookDTO.getFirstname().isEmpty()) {
             throw new IllegalArgumentException("Фамилия обязательна к заполнению");
         }
-        readerDao.saveReader(
-                readerBookDTO.getFirstname(),
-                readerBookDTO.getSurname(),
-                readerBookDTO.getStartReed(),
-                readerBookDTO.getBookId());
+        readerDao.saveReader(readerBookDTO);
     }
 
 
@@ -48,5 +44,15 @@ public class BookReaderServiceImpl implements BookReaderService {
                         .surname(tmp.getSurname())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void updateBookReader(ReaderBookDTO readerBookDTO) {
+        readerDao.update(readerBookDTO);
+    }
+
+    @Override
+    public void deleteBookReader(Long id) {
+        readerDao.deleteBookReader(id);
     }
 }

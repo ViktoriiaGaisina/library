@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface BookRepository extends JpaRepository<BookEntity, Long> {
-    @Query(value = "SELECT * FROM book WHERE name ILIKE :%name AND name_author ILIKE :%name_author AND genre ILIKE :%genre",
+    @Query(value = "SELECT * FROM book WHERE name ILIKE %:name AND name_author ILIKE %:name_author AND genre ILIKE %:genre",
             nativeQuery = true)
     List<BookEntity> findBookEntities(
             @Param("name") String name,
@@ -26,15 +26,6 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
     List<BookEntity> findBookEntityIsRead();
     /*Поиск книг которые в данный момент читают
      (выдавать список в порядке даты - то есть первым из списка выдается та книга которую только начали читать и тд ) */
-
-    @Query(value = "UPDATE book SET name = :name, genre = :genre, name_author = :nameAuthor WHERE book_id_pk = :id",
-            nativeQuery = true)
-    void updateBook(
-            @Param("id") Long id,
-            @Param("name") String name,
-            @Param("genre") String genre,
-            @Param("nameAuthor") String nameAuthor
-    );
 
 }
 

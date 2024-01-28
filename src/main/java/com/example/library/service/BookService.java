@@ -19,9 +19,9 @@ public interface BookService {
      /*Поиск книг которые в данный момент читают
      (выдавать список в порядке даты - то есть первым из списка выдается та книга которую только начали читать и тд ) */
 
-    public void addBook(BookDTO bookDTO);
+     void addBook(BookDTO bookDTO);
 
-    public void updateBook(BookReaderupdateDTO readerupdateDTO);
+     void updateBook(BookReaderupdateDTO readerupdateDTO);
 
-    public void deleteBook(Long id);
+     void deleteBook(Long id);
 }

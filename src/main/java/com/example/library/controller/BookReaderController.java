@@ -2,6 +2,7 @@ package com.example.library.controller;
 
 import com.example.library.dto.ReaderBookDTO;
 import com.example.library.dto.bookreader.BookReaderDTO;
+import com.example.library.dto.bookreader.BookReaderupdateDTO;
 import com.example.library.entity.BookReaderEntity;
 import com.example.library.service.BookReaderService;
 import lombok.RequiredArgsConstructor;
@@ -23,10 +24,11 @@ public class BookReaderController {
     ) {
         return bookReaderService.getBookReaderEntities(firstname, surname);
     }
+
     @GetMapping("{id}/all")
     public List<BookReaderDTO> findBookReaderEntitiesByBook_Id(
             @PathVariable(name = "id") Long id) {
-                return bookReaderService.findBookReaderEntitiesByBook_Id(id);
+        return bookReaderService.findBookReaderEntitiesByBook_Id(id);
     }
 
     @PostMapping("/save")
@@ -34,4 +36,14 @@ public class BookReaderController {
         bookReaderService.saveReader(readerBookDTO);
     }
 
+    @DeleteMapping("/{bookId}/delete")
+    public void deleteBookReader(@PathVariable Long id) {
+        bookReaderService.deleteBookReader(id);
+    }
+
+    @PutMapping("/update")
+    public void updateBookReader(@RequestBody ReaderBookDTO readerBookDTO) {
+        bookReaderService.updateBookReader(readerBookDTO);
+
+    }
 }

@@ -3,6 +3,7 @@ package com.example.library.service.impl;
 import com.example.library.dao.BookDao;
 import com.example.library.dto.book.BookDTO;
 import com.example.library.dto.bookreader.BookReaderupdateDTO;
+import com.example.library.entity.BookEntity;
 import com.example.library.repository.BookRepository;
 import com.example.library.service.BookService;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ public class BookServiceImpl implements BookService {
                         .name(tmp.getName())
                         .genre(tmp.getGenre())
                         .nameAuthor(tmp.getNameAuthor())
+                        .bookId(tmp.getId())
                         .build())
                 .collect(Collectors.toList());
     }
@@ -39,27 +41,29 @@ public class BookServiceImpl implements BookService {
                         .name(tmp.getName())
                         .genre(tmp.getGenre())
                         .nameAuthor(tmp.getNameAuthor())
+                        .bookId(tmp.getId())
                         .build())
                 .collect(Collectors.toList());
     }
 
     @Override
     public void addBook(BookDTO bookDTO) {
-        bookDao.addBook(
-                bookDTO.getName(),
-                bookDTO.getGenre(),
-                bookDTO.getNameAuthor()
-        );
+        BookEntity bookEntity = BookEntity.builder()
+                .name(bookDTO.getName())
+                .genre(bookDTO.getGenre())
+                .nameAuthor(bookDTO.getNameAuthor())
+                .build();
+        bookRepository.save(bookEntity);
+//        bookDao.addBook(
+//                bookDTO.getName(),
+//                bookDTO.getGenre(),
+//                bookDTO.getNameAuthor()
+//        );
     }
 
     @Override
     public void updateBook(BookReaderupdateDTO bookReaderupdateDTO) {
-        bookDao.update(
-                bookReaderupdateDTO.getId(),
-                bookReaderupdateDTO.getName(),
-                bookReaderupdateDTO.getGenre(),
-                bookReaderupdateDTO.getNameAuthor());
-
+        bookDao.update(bookReaderupdateDTO);
     }
 
     @Override

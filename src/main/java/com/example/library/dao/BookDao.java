@@ -9,10 +9,10 @@ import javax.persistence.EntityManager;
 @Repository
 @RequiredArgsConstructor
 public class BookDao {
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     public void addBook(String name, String genre, String nameAuthor) {
-         entityManager.createNativeQuery("INSERT INTO book(name, genre, name_author) VALUES(?, ?, ?)")
+         entityManager.createNativeQuery("INSERT INTO library.public.book(name, genre, name_author) VALUES(?, ?, ?)")
                 .setParameter(1, name)
                 .setParameter(2, genre)
                 .setParameter(3, nameAuthor);

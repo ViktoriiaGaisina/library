@@ -28,7 +28,7 @@ public class BookController {
         return bookService.getBookEntityIsRead();
     }
 
-    @GetMapping("/{bookId}/delete")
+    @DeleteMapping("/{bookId}/delete")
     public void deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
     }
@@ -38,7 +38,7 @@ public class BookController {
         bookService.updateBook(bookReaderupdateDTO);
     }
 
-    @PostMapping("/save")
+  @PostMapping("/save")
     public void addBook(@RequestBody BookDTO bookDTO) {
         bookService.addBook(bookDTO);
     }
